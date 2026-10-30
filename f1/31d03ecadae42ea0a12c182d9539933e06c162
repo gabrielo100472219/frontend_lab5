@@ -1,0 +1,31 @@
+client-cors/.env
+  s_27a53dedf9582b::t_3998c2f978d982 1
+client-cors/src/core/api/index.ts
+  s_27a53dedf9582b::t_6480a5b477940b 1
+client-cors/src/core/api/request.ts
+  s_27a53dedf9582b::t_7b12fd5b20def0 1-41
+client-cors/src/pods/hotel-collection/api/hotel-collection.api.ts
+  s_27a53dedf9582b::t_db4489ec80f184 2,4-5,8
+client-cors/src/pods/hotel-collection/hotel-collection.mapper.ts
+  s_27a53dedf9582b::t_24b9e0e9e114ae 3,9
+client-cors/src/pods/hotel/api/hotel.api.ts
+  s_27a53dedf9582b::t_30f952dd5b8aec 3,5-6,8,10,12-17
+client-cors/src/vite-env.d.ts
+  s_27a53dedf9582b::t_5df19974ec2ba7 1-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "f131d03ecadae42ea0a12c182d9539933e06c162",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
