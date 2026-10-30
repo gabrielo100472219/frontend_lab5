@@ -1,19 +1,14 @@
 import "./style.css";
-import {
-  createHotel,
-  deleteHotel,
-  getHotel,
-  getCities,
-  getHotels,
-  request,
-  updateHotel,
-} from "./hotels.api.ts";
+import * as fetchClient from "./hotels.api.ts";
+import { getCities, getHotels, request } from "./hotels.api.ts";
+import * as axiosClient from "./hotels.axios.ts";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 <main>
   <h1>Hoteles · laboratorio API REST</h1>
   <div class="actions">
     <button id="crud" type="button">Probar CRUD</button>
+    <button id="crud-axios" type="button">Probar CRUD (axios)</button>
     <button id="load-all" type="button">Cargar todo</button>
     <button id="load-failing" type="button">Cargar con fallo</button>
     <button id="reload" type="button">Recargar</button>
@@ -35,7 +30,19 @@ const logError = (error: unknown) => {
   output.textContent += `✖ ${error instanceof Error ? error.message : String(error)}\n`;
 };
 
-const runCrud = async () => {
+type HotelsClient = Pick<
+  typeof fetchClient,
+  "getHotels" | "getHotel" | "createHotel" | "updateHotel" | "deleteHotel"
+>;
+
+// The same walk-through works with both clients: they share the signatures.
+const runCrud = async ({
+  getHotels,
+  getHotel,
+  createHotel,
+  updateHotel,
+  deleteHotel,
+}: HotelsClient) => {
   output.textContent = "";
   try {
     log("1", (await getHotels()).length);
@@ -130,7 +137,10 @@ const reload = async () => {
   }
 };
 
-document.querySelector("#crud")!.addEventListener("click", runCrud);
+document.querySelector("#crud")!.addEventListener("click", () => runCrud(fetchClient));
+document
+  .querySelector("#crud-axios")!
+  .addEventListener("click", () => runCrud(axiosClient));
 document.querySelector("#load-all")!.addEventListener("click", loadAll);
 document.querySelector("#load-failing")!.addEventListener("click", loadWithFailure);
 document.querySelector("#reload")!.addEventListener("click", reload);
