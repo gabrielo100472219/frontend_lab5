@@ -58,17 +58,69 @@ const readApiError = async (
   }
 };
 
+type Method = "GET" | "POST" | "PUT" | "DELETE";
+
 interface RequestOptions {
-  method?: "GET" | "POST" | "PUT" | "DELETE";
+  method?: Method;
   body?: unknown;
   signal?: AbortSignal;
+  // D2: each attempt is aborted after this long.
+  timeoutMs?: number;
+  // D2: extra attempts after a network error, a timeout or a 5xx.
+  // POST is not idempotent, so it isn't retried unless asked explicitly.
+  retries?: number;
+  onRetry?: (attempt: number, delayMs: number, error: unknown) => void;
 }
 
-// Every call to the API goes through here: headers, error handling and
-// unwrapping the { data } envelope live in one place.
+const IDEMPOTENT: Method[] = ["GET", "PUT", "DELETE"];
+const RETRY_BASE_DELAY_MS = 500;
+
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Retry what may work a moment later: no response at all (network error,
+// timeout) or a server failure (5xx). A 4xx would fail again in the same way,
+// and a cancellation by the caller is a decision, not a failure.
+const isRetryable = (error: unknown) =>
+  error instanceof HttpError
+    ? error.status >= 500
+    : error instanceof TypeError ||
+      (error instanceof DOMException && error.name === "TimeoutError");
+
 export const request = async <T>(
   path: string,
-  { method = "GET", body, signal }: RequestOptions = {},
+  {
+    method = "GET",
+    retries = IDEMPOTENT.includes(method) ? 3 : 0,
+    onRetry,
+    ...options
+  }: RequestOptions = {},
+): Promise<T> => {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await requestOnce<T>(path, { method, ...options });
+    } catch (error) {
+      if (
+        attempt >= retries ||
+        !isRetryable(error) ||
+        options.signal?.aborted
+      ) {
+        throw error;
+      }
+      const delayMs = RETRY_BASE_DELAY_MS * 2 ** attempt; // 500, 1000, 2000
+      console.warn(
+        `Reintento ${attempt + 1}/${retries} en ${delayMs} ms`,
+        error,
+      );
+      onRetry?.(attempt + 1, delayMs, error);
+      await wait(delayMs);
+    }
+  }
+};
+
+// One attempt: headers, error handling and unwrapping the { data } envelope.
+const requestOnce = async <T>(
+  path: string,
+  { method = "GET", body, signal, timeoutMs = 5000 }: RequestOptions,
 ): Promise<T> => {
   const url = `${API_BASE}${path}`;
   const headers: Record<string, string> = { Accept: "application/json" };
@@ -76,11 +128,13 @@ export const request = async <T>(
     headers["Content-Type"] = "application/json";
   }
 
+  // Aborts on whichever comes first: the timeout or the caller's signal.
+  const timeout = AbortSignal.timeout(timeoutMs);
   const response = await fetch(url, {
     method,
     headers,
     body: body === undefined ? undefined : JSON.stringify(body),
-    signal,
+    signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
   });
 
   if (!response.ok) {

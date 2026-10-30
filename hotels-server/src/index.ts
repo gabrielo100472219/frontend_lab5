@@ -113,6 +113,21 @@ app.delete("/api/hotels/:id", (req: Request<{ id: string }>, res: Response) => {
   }
 });
 
+// D2 test routes: a server that fails twice and then works, and a slow one.
+let flakyCalls = 0;
+app.get("/api/flaky", (_: Request, res: Response) => {
+  flakyCalls++;
+  if (flakyCalls % 3 !== 0) {
+    return sendError(res, 503, "unavailable", "Try again later");
+  }
+  res.json({ data: { calls: flakyCalls } });
+});
+
+app.get("/api/slow", (req: Request, res: Response) => {
+  const ms = Number(req.query.ms ?? 3000);
+  setTimeout(() => res.json({ data: { waited: ms } }), ms);
+});
+
 // Unknown /api routes answer JSON too, not Express's HTML page.
 app.use("/api", (req: Request, res: Response) => {
   sendError(res, 404, "not_found", `Cannot ${req.method} ${req.originalUrl}`);

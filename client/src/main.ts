@@ -13,6 +13,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <button id="load-failing" type="button">Cargar con fallo</button>
     <button id="reload" type="button">Recargar</button>
     <button id="invalid" type="button">Crear hotel sin nombre</button>
+    <button id="flaky" type="button">Probar reintentos</button>
+    <button id="slow" type="button">Probar tiempo máximo</button>
   </div>
   <pre id="output" aria-live="polite"></pre>
 </main>
@@ -161,6 +163,37 @@ const createInvalidHotel = async () => {
   }
 };
 
+// D2: /api/flaky answers 503 twice and then 200; /api/slow takes 3 s.
+const logRetry = (attempt: number, delayMs: number, error: unknown) =>
+  log(
+    `↻ intento ${attempt + 1} dentro de ${delayMs} ms (${error instanceof Error ? error.message : error})`,
+  );
+
+const tryFlaky = async () => {
+  output.textContent = "";
+  const start = performance.now();
+  try {
+    const data = await request<{ calls: number }>("/flaky", {
+      onRetry: logRetry,
+    });
+    log(`✔ respuesta en la llamada ${data.calls} al servidor (${ms(start)})`);
+  } catch (error) {
+    logError(error);
+  }
+};
+
+const trySlow = async () => {
+  output.textContent = "";
+  const start = performance.now();
+  try {
+    await request("/slow?ms=3000", { timeoutMs: 1000, onRetry: logRetry });
+    log("✔ respondió a tiempo");
+  } catch (error) {
+    logError(error);
+    log(`Me rindo tras ${ms(start)}`);
+  }
+};
+
 document
   .querySelector("#crud")!
   .addEventListener("click", () => runCrud(fetchClient));
@@ -172,6 +205,8 @@ document
   .querySelector("#load-failing")!
   .addEventListener("click", loadWithFailure);
 document.querySelector("#reload")!.addEventListener("click", reload);
+document.querySelector("#flaky")!.addEventListener("click", tryFlaky);
+document.querySelector("#slow")!.addEventListener("click", trySlow);
 document
   .querySelector("#invalid")!
   .addEventListener("click", createInvalidHotel);
