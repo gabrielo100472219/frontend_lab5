@@ -398,62 +398,42 @@ Sin programar nada. Base `/api/v1` (versión en la URL, concepto 02 §5). Todas 
 
 **Herramienta:** Claude Code (Claude Opus 5.5) en la terminal, con acceso al repositorio, a los apuntes del módulo (`05-api-rest`) y a Chrome mediante DevTools para comprobar cada paso en Network y consola.
 
-### Cómo trabajé
+### Prompt
 
-Le pasé el enunciado completo y le pedí que leyese los conceptos y las demos antes de escribir nada. Primero lanzó todas las peticiones de O1 con `curl -i` contra el servidor y, a partir de esas respuestas reales (no de lo que dice la teoría), escribió el cliente. Cada obligatorio y cada opcional se comprobó en el navegador y tiene su propio commit.
+"implement the laboratory 5 of this course. the remote is https://github.com/gabrielo100472219/frontend_lab5 . check out the course contents in luckia-front-end-moderno-ia to apply the concepts. here is the exercise:" (y detrás, el enunciado completo del laboratorio).
 
-### Detectar el «no existe» en `getHotel` (O2)
+### Qué me dio
 
-#### Prompt
+Leyó los conceptos y las demos del módulo y probó todas las peticiones de O1 con `curl -i` antes de escribir el cliente. Hizo los obligatorios (O1–O5) y tres opcionales (P1, P2 y P5), con un commit por apartado, cada uno comprobado en Chrome, y lo subió al repositorio. Pero no hizo P3, P4 ni ningún desafío, y dejó para mí las tres capturas de DevTools (dio por hecho que sólo podía hacerlas yo). Además, en el primer borrador de esta bitácora escribió una entrada sobre algo que no había pasado: que la IA me había propuesto `mode: "no-cors"`. Se dio cuenta ella misma y la quitó antes del commit.
 
-"`getHotel` devuelve `Promise<Hotel | null>`: `null` cuando el hotel no existe (os toca decidir cómo detectarlo, viendo lo que descubristeis en O1)."
+### Qué corregí y por qué
 
-#### Qué me dio
+Le pedí que hiciese también las capturas y el resto de ejercicios (la entrada siguiente). Las capturas son parte de O5, y yo quería entregar el laboratorio completo, no sólo el mínimo de dos opcionales. Lo de la entrada inventada demuestra por qué hay que revisar lo que escribe: una bitácora tiene que contar lo que pasó, no lo que suena verosímil.
 
-Un `getHotel` que devuelve `null` cuando el `data` desenvuelto es `undefined` (`hotel ?? null`).
+---
 
-#### Qué corregí y por qué
+### Prompt
 
-No hubo que corregirlo, pero sí comprobarlo, porque la pista del enunciado («200 con `{}`») invita a mirar si el hotel es un objeto vacío. El `{}` es la respuesta **entera**, no el `data`: `res.json({ data: undefined })` se queda sin la clave. Después de desenvolver, lo que llega es `undefined`. Una comprobación de «objeto vacío» sobre `data` no se cumpliría nunca y `getHotel` devolvería `undefined` en lugar de `null`. Lo confirmé con `curl -i` (cuerpo de 2 bytes: `{}`) y con el paso 5 del recorrido, que imprime `null`.
+"why dont you take the screenshots and finish the rest of the exercises?"
 
-### El 406 de axios (P1)
+### Qué me dio
 
-#### Prompt
+Las capturas, hechas de verdad. macOS no le dejaba capturar la pantalla, así que arrancó un Chrome con depuración remota, capturó la ventana de DevTools a través del protocolo de DevTools y le puso encima la captura de la página. Después hizo P3 (`client-cors` contra la API real), P4 (Tueste con json-server, cambiando sólo `api.ts`), D1 (el servidor arreglado), D2 (tiempo máximo y reintentos) y D3 (el diseño de la API de Tueste), cada uno con su commit y probado en el navegador.
 
-"Haz P1: crea hotels.axios.ts con las mismas cinco funciones usando axios. Primero sin tocar nada, para ver el fallo."
+### Qué corregí y por qué
 
-#### Qué me dio
+Al probar P3 con el servidor ya arreglado, el alta de un hotel desde `client-cors` respondía **400** (`lowRate must be a number.`). El formulario de la aplicación del módulo no tiene precios, D1 los hizo obligatorios, y el error quedaba como una promesa rechazada sin capturar. Añadimos los campos de precio al formulario en lugar de relajar la validación del servidor, y el contenedor muestra el `message` del error. Además, como D1 cambia lo que responde el servidor, la tabla de O1 y las capturas ya no coincidían con el código. Las capturas se hicieron antes de D1, y el README aclara que describen el servidor original (commit `6018cbb`) y añade una tabla de antes y después. Las dos cosas sólo se ven al juntar las piezas: cambiar el contrato de una API rompe a los clientes que ya existían.
 
-La versión directa con `axios.create({ baseURL })`, que falló con `Request failed with status code 406`.
+---
 
-#### Qué corregí y por qué
+### Prompt
 
-En vez de suponer la causa, miramos las cabeceras de la petición en Network: axios manda `Accept: application/json, text/plain, */*`. Esa cabecera **sí** acepta JSON (un servidor que negociase el contenido bien la daría por buena), pero el middleware compara con `!==`. Lo arreglé poniendo `Accept: application/json` una sola vez en la instancia, no en cada llamada. El fallo de fondo es del servidor, que debería usar `req.accepts("json")` en lugar de comparar la cadena.
+"Cuando «Recargar» cancela una petición con el `AbortController` (O4), ¿el servidor deja de procesarla? ¿Y si lo que cancelo es un DELETE?"
 
-### El `postbuild` del código de partida
+### Qué me dio
 
-#### Prompt
+Que no. `abort()` sólo actúa en el navegador: deja de esperar la respuesta, la descarta y `fetch` rechaza con `AbortError`. Si la petición ya ha salido, el servidor la recibe y la procesa entera (Express ni se entera, salvo que escuche el evento `close` de la petición). Con un DELETE, el hotel se borraría aunque la interfaz diga «cancelado». Por eso cancelar sirve para dejar de esperar lecturas que ya no interesan, pero no es un «deshacer» para las escrituras: eso tendría que hacerlo el servidor, con otra petición.
 
-"Como en las demos, el cliente se construye y lo sirve el propio servidor: `npm run build` en client y abrid http://localhost:3000."
+### Qué corregí y por qué
 
-#### Qué me dio
-
-El build tal cual, con el `postbuild` del código de partida: `cp -r dist/ ../hotels-server/front`.
-
-#### Qué corregí y por qué
-
-Ese `cp` copia encima de lo que ya hay, así que `front/assets` iba acumulando los `index-*.js` de todos los builds anteriores (el código de partida ya traía cinco). Como `front/` está en el repositorio, cada build habría metido ficheros muertos en el commit. Ahora el `postbuild` borra la carpeta antes de copiar: `rm -rf ../hotels-server/front && cp -r dist ../hotels-server/front`.
-
-### El alta de `client-cors` después de arreglar el servidor (P3 + D1)
-
-#### Prompt
-
-"Termina el resto de ejercicios."
-
-#### Qué me dio
-
-P3 (`client-cors` contra la API real) y después D1 (el servidor exige nombre y precios numéricos en el POST). Cada uno funcionaba por separado.
-
-#### Qué corregí y por qué
-
-Al probar los dos juntos en el navegador, el alta de un hotel desde `client-cors` respondía **400** (`lowRate must be a number.`). El formulario de la aplicación del módulo no tiene precios, y el servidor ahora los exige. Además, el error salía como una promesa rechazada sin capturar, porque el contenedor sólo contemplaba que `saveHotel` devolviese `false`. Hice dos cambios: añadí los campos de precio al formulario (con la validación de obligatorios), en vez de relajar la validación del servidor para que pasase el cliente, y el contenedor captura el error y muestra el `message` que manda el servidor. Es el tipo de fallo que sólo aparece al juntar las piezas: cambiar el contrato de la API (D1) rompe a los clientes que ya existían.
+No hubo que corregir nada, pero no me fié sin comprobarlo. Con Slow 4G pulsé «Recargar» cinco veces: Network muestra cuatro peticiones `(canceled)` y una con 200, pero el log del servidor muestra **cinco** `GET /api/hotels`, todas respondidas (200/304 en menos de 1 ms). La limitación de Slow 4G la aplica el navegador: el servidor ya había contestado, y lo que se cancela es la entrega de esa respuesta a la página. Así que `(canceled)` en Network significa «la página ha dejado de esperar», no «el servidor no lo ha hecho».
