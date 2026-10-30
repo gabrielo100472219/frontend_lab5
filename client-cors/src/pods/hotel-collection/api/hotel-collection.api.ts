@@ -1,13 +1,10 @@
 import { type HotelEntityApi } from './hotel-collection.api-model';
-import { mockHotelCollection } from './hotel-collection.mock-data';
+import { request } from '#core/api';
 
-let hotelCollection = [...mockHotelCollection];
-
-export const getHotelCollection = async (): Promise<HotelEntityApi[]> => {
-  return hotelCollection;
-};
+export const getHotelCollection = (): Promise<HotelEntityApi[]> =>
+  request<HotelEntityApi[]>('/hotels');
 
 export const deleteHotel = async (id: string): Promise<boolean> => {
-  hotelCollection = hotelCollection.filter((h) => h.id !== id);
+  await request<void>(`/hotels/${id}`, { method: 'DELETE' });
   return true;
 };
