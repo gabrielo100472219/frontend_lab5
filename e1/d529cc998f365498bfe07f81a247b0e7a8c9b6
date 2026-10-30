@@ -1,0 +1,27 @@
+client/.env
+  s_27a53dedf9582b::t_92ac5459cb8ee2 1
+client/src/hotels.api.ts
+  s_27a53dedf9582b::t_286c981c4cbe00 17
+client/src/vite-env.d.ts
+  s_27a53dedf9582b::t_e90d61fee63573 1-9
+hotels-server/front/assets/index-BRVTa-Ul.js
+  s_27a53dedf9582b::t_391a87da55efd9 1
+hotels-server/front/index.html
+  s_27a53dedf9582b::t_71dfffcc414a58 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "e1d529cc998f365498bfe07f81a247b0e7a8c9b6",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
