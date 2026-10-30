@@ -1,0 +1,85 @@
+.gitignore
+  s_27a53dedf9582b::t_6257283646415f 1-5
+client/.gitignore
+  s_27a53dedf9582b::t_0a6ee40eada63c 1-24
+client/.npmrc
+  s_27a53dedf9582b::t_6f27388612ea1c 1
+client/index.html
+  s_27a53dedf9582b::t_6e18fff7abad0d 1-13
+client/package-lock.json
+  s_27a53dedf9582b::t_6d5ce2211a49c8 1-843
+client/package.json
+  s_27a53dedf9582b::t_b02faf969e9b3a 1-16
+client/public/favicon.svg
+  s_27a53dedf9582b::t_0024e350ed82b9 1
+client/public/icons.svg
+  s_27a53dedf9582b::t_7417e043aae7b6 1-24
+client/src/action.ts
+  s_27a53dedf9582b::t_f61cef0dccc73b 1-11
+client/src/main.ts
+  s_27a53dedf9582b::t_58efec05307db9 1-14
+client/src/style.css
+  s_27a53dedf9582b::t_00d10a4521c698 1-3
+client/tsconfig.json
+  s_27a53dedf9582b::t_1b2c47b8622010 1-24
+hotels-server/.gitignore
+  s_27a53dedf9582b::t_9902555c0147fd 1-5
+hotels-server/.npmrc
+  s_27a53dedf9582b::t_7f0db91b2b258d 1
+hotels-server/front/assets/index-BIPuEB19.css
+  s_27a53dedf9582b::t_9436cce8e86a26 1
+hotels-server/front/assets/index-BMSpOwKi.js
+  s_27a53dedf9582b::t_e1c4c93bd04505 1-9
+hotels-server/front/assets/index-C26CHJGU.js
+  s_27a53dedf9582b::t_b049bcd96e8871 1-9
+hotels-server/front/assets/index-CQT-6oUo.js
+  s_27a53dedf9582b::t_8c5c2131f7b0e2 1-9
+hotels-server/front/assets/index-CRhts24f.js
+  s_27a53dedf9582b::t_f611a818056294 1-9
+hotels-server/front/assets/index-DaeAb0ix.js
+  s_27a53dedf9582b::t_689a353205f4ac 1-9
+hotels-server/front/assets/index-x1XGuNl0.css
+  s_27a53dedf9582b::t_cc951c43634b9e 1
+hotels-server/front/favicon.svg
+  s_27a53dedf9582b::t_c5fff4231deea7 1
+hotels-server/front/icons.svg
+  s_27a53dedf9582b::t_733bfe1897c896 1-24
+hotels-server/front/index.html
+  s_27a53dedf9582b::t_f7a5ec5a1d74a9 1-14
+hotels-server/package-lock.json
+  s_27a53dedf9582b::t_a75aeed5f1f66f 1-1975
+hotels-server/package.json
+  s_27a53dedf9582b::t_48544a167b5cdf 1-27
+hotels-server/src/config.ts
+  s_27a53dedf9582b::t_5a039f18bc2387 1-4
+hotels-server/src/data-layer/city.repo.ts
+  s_27a53dedf9582b::t_daeef54ff06f0c 1-16
+hotels-server/src/data-layer/hotel.repo.ts
+  s_27a53dedf9582b::t_cdba31ceae3e3e 1-119
+hotels-server/src/data-layer/index.ts
+  s_27a53dedf9582b::t_e2ced481da0d8a 1-11
+hotels-server/src/data-layer/mock-data.ts
+  s_27a53dedf9582b::t_287e49c70e7c9d 1-425
+hotels-server/src/index.ts
+  s_27a53dedf9582b::t_14313dfc5cdf75 1-126
+hotels-server/src/middleware.ts
+  s_27a53dedf9582b::t_617e4915c668b3 1-15
+hotels-server/tsconfig.json
+  s_27a53dedf9582b::t_6ebb135a5ee379 1-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "6018cbbd96ef01c32a99fedbbb161e71b3ade7d3",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
