@@ -1,0 +1,149 @@
+client-cors/.gitignore
+  s_27a53dedf9582b::t_e36289bd30e0cb 1-24
+client-cors/.npmrc
+  s_27a53dedf9582b::t_3449e2d1640d38 1
+client-cors/README.md
+  s_27a53dedf9582b::t_c8b035915cd000 1-75
+client-cors/eslint.config.js
+  s_27a53dedf9582b::t_fe153e07a3e5e2 1-22
+client-cors/index.html
+  s_27a53dedf9582b::t_8e6444aa8b8629 1-13
+client-cors/package-lock.json
+  s_27a53dedf9582b::t_27d2d23bfc3f5c 1-3995
+client-cors/package.json
+  s_27a53dedf9582b::t_5a86bbcd8cf87a 1-44
+client-cors/src/App.tsx
+  s_27a53dedf9582b::t_01606178dcbbc8 1-12
+client-cors/src/common/components/form/index.ts
+  s_27a53dedf9582b::t_37faefcf404aea 1-3
+client-cors/src/common/components/form/rating.component.tsx
+  s_27a53dedf9582b::t_349e2345d7f4d4 1-39
+client-cors/src/common/components/form/select/index.ts
+  s_27a53dedf9582b::t_eea230a58bcd8a 1
+client-cors/src/common/components/form/select/select.component.tsx
+  s_27a53dedf9582b::t_99bb5d2613fc27 1-72
+client-cors/src/common/components/form/select/select.styles.ts
+  s_27a53dedf9582b::t_f4f71e364d177b 1-7
+client-cors/src/common/components/form/text-field/index.ts
+  s_27a53dedf9582b::t_eb680eb7863fad 1
+client-cors/src/common/components/form/text-field/text-field.component.tsx
+  s_27a53dedf9582b::t_741fb450c06c75 1-40
+client-cors/src/common/components/form/text-field/text-field.styles.ts
+  s_27a53dedf9582b::t_5176aed9b50b37 1-7
+client-cors/src/common/components/index.ts
+  s_27a53dedf9582b::t_0a832084e12363 1
+client-cors/src/common/mappers/collection.mapper.ts
+  s_27a53dedf9582b::t_752d30566ee059 1-2
+client-cors/src/common/mappers/index.ts
+  s_27a53dedf9582b::t_18aa5094f3c0ab 1
+client-cors/src/common/models/index.ts
+  s_27a53dedf9582b::t_35b2b3664b462a 1
+client-cors/src/common/models/lookup.ts
+  s_27a53dedf9582b::t_ef1d64384291c5 1-9
+client-cors/src/core/router/index.ts
+  s_27a53dedf9582b::t_89245de3190b34 1-2
+client-cors/src/core/router/router.component.tsx
+  s_27a53dedf9582b::t_eb6043606f0dc7 1-21
+client-cors/src/core/router/routes.ts
+  s_27a53dedf9582b::t_395c05e4d8ef61 1-26
+client-cors/src/core/theme/index.ts
+  s_27a53dedf9582b::t_5536136b745427 1-3
+client-cors/src/core/theme/theme-provider.component.tsx
+  s_27a53dedf9582b::t_bee52b289a325d 1-17
+client-cors/src/core/theme/theme.helpers.ts
+  s_27a53dedf9582b::t_338da6938d2fed 1-13
+client-cors/src/core/theme/theme.ts
+  s_27a53dedf9582b::t_d45e73401e7856 1-5
+client-cors/src/index.css
+  s_27a53dedf9582b::t_2bb1cd4f6f24ca 1-111
+client-cors/src/layouts/app.layout.styles.ts
+  s_27a53dedf9582b::t_2bdfaa60698749 1-5
+client-cors/src/layouts/app.layout.tsx
+  s_27a53dedf9582b::t_f83127c91b8c07 1-27
+client-cors/src/layouts/centered.layout.styles.ts
+  s_27a53dedf9582b::t_7548a3381beb1f 1-13
+client-cors/src/layouts/centered.layout.tsx
+  s_27a53dedf9582b::t_812f7d13e34472 1-10
+client-cors/src/layouts/index.ts
+  s_27a53dedf9582b::t_8cdda0d852965c 1-2
+client-cors/src/main.tsx
+  s_27a53dedf9582b::t_e81995dab84581 1-10
+client-cors/src/pods/hotel-collection/api/hotel-collection.api-model.ts
+  s_27a53dedf9582b::t_363c11e9a7cda7 1-37
+client-cors/src/pods/hotel-collection/api/hotel-collection.api.ts
+  s_27a53dedf9582b::t_be4ac516ac1ec1 1-13
+client-cors/src/pods/hotel-collection/api/hotel-collection.mock-data.ts
+  s_27a53dedf9582b::t_5ad45b76df8fad 1-84
+client-cors/src/pods/hotel-collection/api/index.ts
+  s_27a53dedf9582b::t_ab0289827dda5b 1-2
+client-cors/src/pods/hotel-collection/components/hotel-card.component.tsx
+  s_27a53dedf9582b::t_1a389d9806bf55 1-57
+client-cors/src/pods/hotel-collection/components/hotel-card.styles.ts
+  s_27a53dedf9582b::t_83d5690f3f6738 1-7
+client-cors/src/pods/hotel-collection/hotel-collection.component.tsx
+  s_27a53dedf9582b::t_ddfb10c640a823 1-34
+client-cors/src/pods/hotel-collection/hotel-collection.container.tsx
+  s_27a53dedf9582b::t_e1c7589a5dd3f8 1-37
+client-cors/src/pods/hotel-collection/hotel-collection.hook.ts
+  s_27a53dedf9582b::t_cb39f5305f67f5 1-19
+client-cors/src/pods/hotel-collection/hotel-collection.mapper.ts
+  s_27a53dedf9582b::t_c71e3fe2f1e8ba 1-13
+client-cors/src/pods/hotel-collection/hotel-collection.styles.ts
+  s_27a53dedf9582b::t_78ced44cd67836 1-26
+client-cors/src/pods/hotel-collection/hotel-collection.vm.ts
+  s_27a53dedf9582b::t_dc4afc90811461 1-8
+client-cors/src/pods/hotel-collection/index.ts
+  s_27a53dedf9582b::t_f60bb18d0b6c67 1
+client-cors/src/pods/hotel/api/hotel.api-model.ts
+  s_27a53dedf9582b::t_0cd6eba5c8bd3a 1-37
+client-cors/src/pods/hotel/api/hotel.api.ts
+  s_27a53dedf9582b::t_f9b0405f427e92 1-16
+client-cors/src/pods/hotel/api/hotel.mock-data.ts
+  s_27a53dedf9582b::t_284d9cb6ee62d2 1-96
+client-cors/src/pods/hotel/api/index.ts
+  s_27a53dedf9582b::t_242bfbf4dd2a77 1-2
+client-cors/src/pods/hotel/hotel.component.tsx
+  s_27a53dedf9582b::t_cb2f8fd5d3ecbe 1-49
+client-cors/src/pods/hotel/hotel.container.tsx
+  s_27a53dedf9582b::t_1987c8b84c7c01 1-43
+client-cors/src/pods/hotel/hotel.mappers.ts
+  s_27a53dedf9582b::t_52e1663aa82213 1-25
+client-cors/src/pods/hotel/hotel.styles.ts
+  s_27a53dedf9582b::t_19082c72aea2a2 1-7
+client-cors/src/pods/hotel/hotel.validations.ts
+  s_27a53dedf9582b::t_7ad85a939efd72 1-21
+client-cors/src/pods/hotel/hotel.vm.ts
+  s_27a53dedf9582b::t_94f8ff352e4c51 1-17
+client-cors/src/pods/hotel/index.ts
+  s_27a53dedf9582b::t_23c178c820cfe9 1
+client-cors/src/scenes/hotel-collection.scene.tsx
+  s_27a53dedf9582b::t_a362b342447c16 1-8
+client-cors/src/scenes/hotel.scene.tsx
+  s_27a53dedf9582b::t_eaa197286bff65 1-8
+client-cors/src/scenes/index.ts
+  s_27a53dedf9582b::t_fbc2bd40b31f02 1-2
+client-cors/tsconfig.app.json
+  s_27a53dedf9582b::t_ed1c740d3caef2 1-29
+client-cors/tsconfig.json
+  s_27a53dedf9582b::t_d78656bfa9cd9d 1-7
+client-cors/tsconfig.node.json
+  s_27a53dedf9582b::t_76dfca34931be1 1-23
+client-cors/vite.config.ts
+  s_27a53dedf9582b::t_bedd8324673741 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "3cc6fc81d8f087b0ef7be8b54d5674b79751fa84",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
