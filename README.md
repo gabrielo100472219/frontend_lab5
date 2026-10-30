@@ -400,7 +400,7 @@ Sin programar nada. Base `/api/v1` (versión en la URL, concepto 02 §5). Todas 
 
 ### Prompt
 
-"implement the laboratory 5 of this course. the remote is https://github.com/gabrielo100472219/frontend_lab5 . check out the course contents in luckia-front-end-moderno-ia to apply the concepts. here is the exercise:" (y detrás, el enunciado completo del laboratorio).
+"Implementa el laboratorio 5 de este curso. El repositorio remoto es https://github.com/gabrielo100472219/frontend_lab5. Revisa los contenidos del curso en luckia-front-end-moderno-ia para aplicar los conceptos. Aquí tienes el ejercicio:" (y detrás, el enunciado completo del laboratorio).
 
 ### Qué me dio
 
@@ -414,7 +414,7 @@ Le pedí que terminase el resto de ejercicios (la entrada siguiente): quería en
 
 ### Prompt
 
-"finish the rest of the exercises"
+"Termina el resto de los ejercicios."
 
 ### Qué me dio
 
