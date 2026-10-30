@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:proxy": "vite --mode proxy",
     "build": "tsc && vite build",
     "postbuild": "rm -rf ../hotels-server/front && cp -r dist ../hotels-server/front",
     "preview": "vite preview"
