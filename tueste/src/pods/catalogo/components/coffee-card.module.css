@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid #e7e5e4;
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px #0000000d;
+  transition: border-color 150ms;
+}
+
+.card:hover {
+  border-color: #fcd34d;
+}
+
+.name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.origin {
+  font-size: 0.875rem;
+  color: #78716c;
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #78350f;
+}
+
+.add {
+  align-self: flex-start;
+}

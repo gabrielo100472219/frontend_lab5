@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Etiopía Yirgacheffe",
+    "origin": "Etiopía",
+    "roast": "light",
+    "price": 14.9,
+    "notes": "Floral, bergamota y té negro."
+  },
+  {
+    "id": 2,
+    "name": "Colombia Huila",
+    "origin": "Colombia",
+    "roast": "medium",
+    "price": 12.9,
+    "notes": "Caramelo y manzana roja."
+  },
+  {
+    "id": 3,
+    "name": "Kenia AA",
+    "origin": "Kenia",
+    "roast": "light",
+    "price": 15.5,
+    "notes": "Frutos rojos y pomelo."
+  },
+  {
+    "id": 4,
+    "name": "Brasil Cerrado",
+    "origin": "Brasil",
+    "roast": "dark",
+    "price": 10.5,
+    "notes": "Chocolate y avellana."
+  },
+  {
+    "id": 5,
+    "name": "Guatemala Antigua",
+    "origin": "Guatemala",
+    "roast": "medium",
+    "price": 13.2,
+    "notes": "Cacao y especias."
+  },
+  {
+    "id": 6,
+    "name": "Sumatra Mandheling",
+    "origin": "Indonesia",
+    "roast": "dark",
+    "price": 13.9,
+    "notes": "Tierra, cedro y chocolate negro."
+  }
+]
