@@ -1,0 +1,111 @@
+tueste/.gitignore
+  s_b4d76b4572d43a::t_32b96a49fff473 1-4
+tueste/.npmrc
+  s_b4d76b4572d43a::t_d9b6cdc0d818b8 1
+tueste/README.md
+  s_b4d76b4572d43a::t_5c13828635ea41 1-250
+tueste/index.html
+  s_b4d76b4572d43a::t_36602439106694 1-5
+tueste/public/coffees.json
+  s_b4d76b4572d43a::t_54494a2f9cab16 1-50
+tueste/src/main.tsx
+  s_b4d76b4572d43a::t_21cb24a1f5c967 1-5
+tueste/src/vite-env.d.ts
+  s_b4d76b4572d43a::t_cb602b01679047 1
+tueste/tsconfig.json
+  s_b4d76b4572d43a::t_887d990072b346 1-20
+tueste/package-lock.json
+  s_b4d76b4572d43a::t_74a9ad74a5595d 1-2848
+tueste/package.json
+  s_b4d76b4572d43a::t_c9200600700f67 1-28
+tueste/src/app.tsx
+  s_b4d76b4572d43a::t_ed888de06e8f9e 1-6
+tueste/src/common/components/offer-countdown.tsx
+  s_b4d76b4572d43a::t_d3c05f1f13906c 1-35
+tueste/src/common/components/request-status.tsx
+  s_b4d76b4572d43a::t_a08793f502307e 1-7
+tueste/src/common/format.ts
+  s_b4d76b4572d43a::t_7b7a1f8c70c761 1-4
+tueste/src/core/cart/cart-context.ts
+  s_b4d76b4572d43a::t_d10d724e4e2f55 1-16
+tueste/src/core/cart/cart-provider.tsx
+  s_b4d76b4572d43a::t_f086755f0c3a26 1-38
+tueste/src/core/coffees/api.ts
+  s_b4d76b4572d43a::t_1fdfdfc399ec7e 1-66
+tueste/src/core/coffees/coffee.schema.ts
+  s_b4d76b4572d43a::t_e913c34955909e 1-20
+tueste/src/core/coffees/hooks.ts
+  s_b4d76b4572d43a::t_d0278af9b9a841 1-60
+tueste/src/core/coffees/model.ts
+  s_b4d76b4572d43a::t_13eadbb70d25f0 1-18
+tueste/src/core/router/router.ts
+  s_b4d76b4572d43a::t_ce0906d2a744dc 1-10
+tueste/src/experiments/memo-lab.tsx
+  s_b4d76b4572d43a::t_03f30afac18d8b 1-121
+tueste/src/layouts/app-layout.tsx
+  s_b4d76b4572d43a::t_e1538bcee68178 1-42
+tueste/src/pods/catalogo/catalogo.component.tsx
+  s_b4d76b4572d43a::t_49dcc7744d9406 1-103
+tueste/src/pods/catalogo/catalogo.container.tsx
+  s_b4d76b4572d43a::t_cc607932181d82 1-39
+tueste/src/pods/catalogo/catalogo.vm.ts
+  s_b4d76b4572d43a::t_58d54e5b4b628e 1-6
+tueste/src/pods/catalogo/components/coffee-card.module.css
+  s_b4d76b4572d43a::t_e7a781a0ec2641 1-36
+tueste/src/pods/catalogo/components/coffee-card.tsx
+  s_b4d76b4572d43a::t_8a7d019a2dbe9a 1-32
+tueste/src/pods/catalogo/detalle.component.tsx
+  s_b4d76b4572d43a::t_f98a7082c470fa 1-97
+tueste/src/pods/catalogo/detalle.container.tsx
+  s_b4d76b4572d43a::t_bc23a1dd188c44 1-26
+tueste/src/pods/catalogo/index.ts
+  s_b4d76b4572d43a::t_d5d5e435734a62 1-3
+tueste/src/pods/edicion/edicion.component.tsx
+  s_b4d76b4572d43a::t_5a8a4803ae6a7c 1-188
+tueste/src/pods/edicion/edicion.container.tsx
+  s_b4d76b4572d43a::t_f48e9c6b59ff1d 1-50
+tueste/src/pods/edicion/index.ts
+  s_b4d76b4572d43a::t_044ef5ed72d983 1
+tueste/src/routeTree.gen.ts
+  s_b4d76b4572d43a::t_c781753817790f 1-168
+tueste/src/routes/__root.tsx
+  s_b4d76b4572d43a::t_22617a05632636 1-7
+tueste/src/routes/coffees/$coffeeId/edit.tsx
+  s_b4d76b4572d43a::t_c6e0abf818f5a8 1-11
+tueste/src/routes/coffees/$coffeeId/index.tsx
+  s_b4d76b4572d43a::t_b54518b3e1c9d2 1-11
+tueste/src/routes/coffees/index.tsx
+  s_b4d76b4572d43a::t_3733445860699f 1-20
+tueste/src/routes/coffees/new.tsx
+  s_b4d76b4572d43a::t_ba4892a22e7b98 1-6
+tueste/src/routes/experimentos/memo.tsx
+  s_b4d76b4572d43a::t_122ea9a63aa296 1-6
+tueste/src/routes/index.tsx
+  s_b4d76b4572d43a::t_8591702e82294d 1-5
+tueste/src/scenes/catalogo.scene.tsx
+  s_b4d76b4572d43a::t_1bf369ffb01a19 1-34
+tueste/src/scenes/detalle.scene.tsx
+  s_b4d76b4572d43a::t_9f3e83cd3ca0b2 1-19
+tueste/src/scenes/edicion.scene.tsx
+  s_b4d76b4572d43a::t_848b1f9a6ab7fc 1-33
+tueste/src/styles.css
+  s_b4d76b4572d43a::t_9c8e82d1038af1 1-17
+tueste/vite.config.ts
+  s_b4d76b4572d43a::t_a931ff9d69e10c 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "ecbf423c8b20e304dfaa28f01d71c2cb0769d45d",
+  "prompts": {},
+  "sessions": {
+    "s_b4d76b4572d43a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "efd93bcb-6dc2-473a-b6c2-a47855ed21f1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
