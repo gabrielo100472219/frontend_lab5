@@ -1,0 +1,23 @@
+client/.env.proxy
+  s_27a53dedf9582b::t_e7644ef2154194 1-2
+client/package.json
+  s_27a53dedf9582b::t_a8a1a904c230fb 8
+client/vite.config.ts
+  s_27a53dedf9582b::t_ea3a4a099d1830 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "68b463a1f8f663ff1e8069f0f1fe97a98328ef47",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
