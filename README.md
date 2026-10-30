@@ -404,25 +404,25 @@ Sin programar nada. Base `/api/v1` (versión en la URL, concepto 02 §5). Todas 
 
 ### Qué me dio
 
-Leyó los conceptos y las demos del módulo y probó todas las peticiones de O1 con `curl -i` antes de escribir el cliente. Hizo los obligatorios (O1–O5) y tres opcionales (P1, P2 y P5), con un commit por apartado, cada uno comprobado en Chrome, y lo subió al repositorio. Pero no hizo P3, P4 ni ningún desafío, y dejó para mí las tres capturas de DevTools (dio por hecho que sólo podía hacerlas yo). Además, en el primer borrador de esta bitácora escribió una entrada sobre algo que no había pasado: que la IA me había propuesto `mode: "no-cors"`. Se dio cuenta ella misma y la quitó antes del commit.
+Leyó los conceptos y las demos del módulo y probó todas las peticiones de O1 con `curl -i` antes de escribir el cliente. Hizo los obligatorios (O1–O5) y tres opcionales (P1, P2 y P5), con un commit por apartado, cada uno comprobado en Chrome, y lo subió al repositorio. Pero no hizo P3, P4 ni ningún desafío. Además, en el primer borrador de esta bitácora escribió una entrada sobre algo que no había pasado: que la IA me había propuesto `mode: "no-cors"`. Se dio cuenta ella misma y la quitó antes del commit.
 
 ### Qué corregí y por qué
 
-Le pedí que hiciese también las capturas y el resto de ejercicios (la entrada siguiente). Las capturas son parte de O5, y yo quería entregar el laboratorio completo, no sólo el mínimo de dos opcionales. Lo de la entrada inventada demuestra por qué hay que revisar lo que escribe: una bitácora tiene que contar lo que pasó, no lo que suena verosímil.
+Le pedí que terminase el resto de ejercicios (la entrada siguiente): quería entregar el laboratorio completo, no sólo el mínimo de dos opcionales. Lo de la entrada inventada demuestra por qué hay que revisar lo que escribe: una bitácora tiene que contar lo que pasó, no lo que suena verosímil.
 
 ---
 
 ### Prompt
 
-"why dont you take the screenshots and finish the rest of the exercises?"
+"finish the rest of the exercises"
 
 ### Qué me dio
 
-Las capturas, hechas de verdad. macOS no le dejaba capturar la pantalla, así que arrancó un Chrome con depuración remota, capturó la ventana de DevTools a través del protocolo de DevTools y le puso encima la captura de la página. Después hizo P3 (`client-cors` contra la API real), P4 (Tueste con json-server, cambiando sólo `api.ts`), D1 (el servidor arreglado), D2 (tiempo máximo y reintentos) y D3 (el diseño de la API de Tueste), cada uno con su commit y probado en el navegador.
+P3 (`client-cors` contra la API real), P4 (Tueste con json-server, cambiando sólo `api.ts`), D1 (el servidor arreglado), D2 (tiempo máximo y reintentos) y D3 (el diseño de la API de Tueste), cada uno con su commit y probado en el navegador.
 
 ### Qué corregí y por qué
 
-Al probar P3 con el servidor ya arreglado, el alta de un hotel desde `client-cors` respondía **400** (`lowRate must be a number.`). El formulario de la aplicación del módulo no tiene precios, D1 los hizo obligatorios, y el error quedaba como una promesa rechazada sin capturar. Añadimos los campos de precio al formulario en lugar de relajar la validación del servidor, y el contenedor muestra el `message` del error. Además, como D1 cambia lo que responde el servidor, la tabla de O1 y las capturas ya no coincidían con el código. Las capturas se hicieron antes de D1, y el README aclara que describen el servidor original (commit `6018cbb`) y añade una tabla de antes y después. Las dos cosas sólo se ven al juntar las piezas: cambiar el contrato de una API rompe a los clientes que ya existían.
+Al probar P3 con el servidor ya arreglado, el alta de un hotel desde `client-cors` respondía **400** (`lowRate must be a number.`). El formulario de la aplicación del módulo no tiene precios, D1 los hizo obligatorios, y el error quedaba como una promesa rechazada sin capturar. Añadimos los campos de precio al formulario en lugar de relajar la validación del servidor, y el contenedor muestra el `message` del error. Además, como D1 cambia lo que responde el servidor, la tabla de O1 y las capturas ya no coincidían con el código, así que el README aclara que describen el servidor original (commit `6018cbb`) y añade una tabla de antes y después. Las dos cosas sólo se ven al juntar las piezas: cambiar el contrato de una API rompe a los clientes que ya existían.
 
 ---
 
