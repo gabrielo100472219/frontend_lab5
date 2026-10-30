@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "postbuild": "cp -r dist/ ../hotels-server/front",
+    "postbuild": "rm -rf ../hotels-server/front && cp -r dist ../hotels-server/front",
     "preview": "vite preview"
   },
   "devDependencies": {
