@@ -14,7 +14,7 @@ export interface City {
   name: string;
 }
 
-const API_BASE = "/api";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 export class HttpError extends Error {
   readonly status: number;

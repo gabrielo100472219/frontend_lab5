@@ -1,0 +1,10 @@
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),t.credentials=e.crossOrigin===`use-credentials`?`include`:e.crossOrigin===`anonymous`?`omit`:`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`http://localhost:3000/api`,t=class extends Error{status;constructor(e,t,n,r){super(`${e} ${t} → ${n} ${r}`),this.name=`HttpError`,this.status=n}},n=async(n,{method:r=`GET`,body:i,signal:a}={})=>{let o=`${e}${n}`,s={Accept:`application/json`};i!==void 0&&(s[`Content-Type`]=`application/json`);let c=await fetch(o,{method:r,headers:s,body:i===void 0?void 0:JSON.stringify(i),signal:a});if(!c.ok)throw new t(r,o,c.status,c.statusText);if(c.status===204)return;let{data:l}=await c.json();return l},r=e=>n(`/hotels`,{signal:e}),i=async e=>await n(`/hotels/${e}`)??null,a=e=>n(`/hotels`,{method:`POST`,body:e}),o=(e,t)=>n(`/hotels/${e}`,{method:`PUT`,body:t}),s=e=>n(`/hotels/${e}`,{method:`DELETE`});document.querySelector(`#app`).innerHTML=`
+<main>
+  <h1>Hoteles · laboratorio API REST</h1>
+  <div class="actions">
+    <button id="crud" type="button">Probar CRUD</button>
+  </div>
+  <pre id="output" aria-live="polite"></pre>
+</main>
+`;var c=document.querySelector(`#output`),l=(...e)=>{console.log(...e),c.textContent+=e.map(String).join(` `)+`
+`},u=e=>{console.error(e),c.textContent+=`✖ ${e instanceof Error?e.message:String(e)}\n`};document.querySelector(`#crud`).addEventListener(`click`,async()=>{c.textContent=``;try{l(`1`,(await r()).length);let e=await a({name:`Hotel Tueste`,city:`Seattle`,lowRate:90,highRate:120});l(`2`,e.name,e.id),l(`3`,(await i(e.id))?.name),l(`4`,(await o(e.id,{lowRate:95})).lowRate),await s(e.id),l(`5`,await i(e.id)),l(`6`,(await r()).length)}catch(e){u(e)}});
