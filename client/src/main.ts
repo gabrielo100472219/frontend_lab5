@@ -70,7 +70,9 @@ const loadAll = async () => {
   try {
     let start = performance.now();
     const [hotels, cities] = await Promise.all([getHotels(), getCities()]);
-    log(`En paralelo: ${hotels.length} hoteles, ${cities.length} ciudades (${ms(start)})`);
+    log(
+      `En paralelo: ${hotels.length} hoteles, ${cities.length} ciudades (${ms(start)})`,
+    );
 
     start = performance.now();
     const hotelsInOrder = await getHotels();
@@ -137,10 +139,14 @@ const reload = async () => {
   }
 };
 
-document.querySelector("#crud")!.addEventListener("click", () => runCrud(fetchClient));
+document
+  .querySelector("#crud")!
+  .addEventListener("click", () => runCrud(fetchClient));
 document
   .querySelector("#crud-axios")!
   .addEventListener("click", () => runCrud(axiosClient));
 document.querySelector("#load-all")!.addEventListener("click", loadAll);
-document.querySelector("#load-failing")!.addEventListener("click", loadWithFailure);
+document
+  .querySelector("#load-failing")!
+  .addEventListener("click", loadWithFailure);
 document.querySelector("#reload")!.addEventListener("click", reload);

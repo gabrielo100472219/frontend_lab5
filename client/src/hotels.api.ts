@@ -1,11 +1,16 @@
+import { z } from "zod";
+
 // Only the fields the front uses: the server sends ~30 per hotel.
-export interface Hotel {
-  id: string;
-  name: string;
-  city: string;
-  lowRate: number;
-  highRate: number;
-}
+// The schema checks them at runtime and strips everything else.
+const hotelSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  city: z.string(),
+  lowRate: z.number(),
+  highRate: z.number(),
+});
+
+export type Hotel = z.infer<typeof hotelSchema>;
 
 export type NewHotel = Omit<Hotel, "id">;
 
@@ -64,14 +69,34 @@ export const request = async <T>(
   return data;
 };
 
-export const getHotels = (signal?: AbortSignal) =>
-  request<Hotel[]>("/hotels", { signal });
+// A type assertion trusts the server; this actually checks what arrived.
+const parseResponse = <T>(
+  schema: z.ZodType<T>,
+  data: unknown,
+  path: string,
+): T => {
+  const result = schema.safeParse(data);
+  if (!result.success) {
+    throw new Error(
+      `Respuesta inesperada de ${path}:\n${z.prettifyError(result.error)}`,
+    );
+  }
+  return result.data;
+};
+
+export const getHotels = async (signal?: AbortSignal) =>
+  parseResponse(
+    z.array(hotelSchema),
+    await request<unknown>("/hotels", { signal }),
+    "/hotels",
+  );
 
 // The server answers 200 with {} (no data key) when the id doesn't exist,
 // so a missing data means "not found", not an error.
 export const getHotel = async (id: string): Promise<Hotel | null> => {
-  const hotel = await request<Hotel | undefined>(`/hotels/${id}`);
-  return hotel ?? null;
+  const path = `/hotels/${id}`;
+  const hotel = await request<unknown>(path);
+  return hotel === undefined ? null : parseResponse(hotelSchema, hotel, path);
 };
 
 export const createHotel = (hotel: NewHotel) =>
