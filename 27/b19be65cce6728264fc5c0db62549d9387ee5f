@@ -1,0 +1,25 @@
+client/src/hotels.api.ts
+  s_27a53dedf9582b::t_7bbceacebbd6b2 1-2,4-13,72-92,97-99
+client/src/main.ts
+  s_27a53dedf9582b::t_6b965c62544a75 73-75,142-144,149-151
+hotels-server/front/assets/index-DBO8yfx7.js
+  s_27a53dedf9582b::t_ba9bfdd5be0d25 1-63,66-68,71-72,84-85
+hotels-server/front/index.html
+  s_27a53dedf9582b::t_dd2190d263c267 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "27b19be65cce6728264fc5c0db62549d9387ee5f",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
