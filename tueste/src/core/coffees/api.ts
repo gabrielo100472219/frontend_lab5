@@ -1,30 +1,20 @@
 import { coffeeSchema } from "./coffee.schema";
 import type { Coffee, CoffeeInput } from "./model";
 
-const storageKey = "tueste-lab4-coffees";
-// El JSON no se puede modificar: guardamos qué ids se han eliminado.
-const deletedKey = "tueste-lab4-deleted";
+// P4 (lab 5): the coffees live in a REST API (json-server, `npm run api`)
+// instead of coffees.json + localStorage. Same functions, same signatures:
+// nothing outside this file had to change.
+const baseUrl = "http://localhost:3001/coffees";
 
-function readChanges(): Coffee[] {
-  const raw = localStorage.getItem(storageKey);
-  if (!raw) return [];
-  return JSON.parse(raw) as Coffee[];
-}
-
-function readDeleted(): number[] {
-  const raw = localStorage.getItem(deletedKey);
-  if (!raw) return [];
-  return JSON.parse(raw) as number[];
-}
+const jsonHeaders = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
 
 export async function getCoffees(signal: AbortSignal): Promise<Coffee[]> {
-  const response = await fetch("/coffees.json", { signal });
+  const response = await fetch(baseUrl, { signal });
   if (!response.ok) throw new Error("No se ha podido cargar el catálogo.");
-  const initial: Coffee[] = await response.json();
-  const byId = new Map(initial.map((coffee) => [coffee.id, coffee]));
-  for (const coffee of readChanges()) byId.set(coffee.id, coffee);
-  for (const id of readDeleted()) byId.delete(id);
-  return [...byId.values()];
+  return (await response.json()) as Coffee[];
 }
 
 export async function getCoffee(
@@ -32,35 +22,33 @@ export async function getCoffee(
   signal: AbortSignal,
 ): Promise<Coffee | null> {
   if (!/^[1-9]\d*$/.test(id)) return null;
-  const coffees = await getCoffees(signal);
-  return coffees.find((coffee) => coffee.id === Number(id)) ?? null;
+  const response = await fetch(`${baseUrl}/${id}`, { signal });
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error("No se ha podido cargar el café.");
+  return (await response.json()) as Coffee;
 }
 
-// Simulamos la espera de un servidor para que se vea el botón desactivado.
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
+// Without an id it's a POST and json-server assigns the next numeric id;
+// with one it's a PUT that replaces the coffee.
 export async function saveCoffee(
   input: CoffeeInput,
   id?: number,
 ): Promise<Coffee> {
   const values = coffeeSchema.parse(input);
-  const all = await getCoffees(new AbortController().signal);
-  if (id !== undefined && !all.some((coffee) => coffee.id === id)) {
-    throw new Error("Café no encontrado.");
-  }
-  // Los ids eliminados no se reutilizan: un café nuevo no puede quedar oculto.
-  const usedIds = [...all.map((item) => item.id), ...readDeleted()];
-  const coffee = { ...values, id: id ?? Math.max(0, ...usedIds) + 1 };
-  const changes = readChanges().filter((item) => item.id !== coffee.id);
-  await wait(600);
-  // Si setItem falla, la promesa rechaza y el formulario conserva los datos.
-  localStorage.setItem(storageKey, JSON.stringify([...changes, coffee]));
-  return coffee;
+  const response = await fetch(
+    id === undefined ? baseUrl : `${baseUrl}/${id}`,
+    {
+      method: id === undefined ? "POST" : "PUT",
+      headers: jsonHeaders,
+      body: JSON.stringify(id === undefined ? values : { ...values, id }),
+    },
+  );
+  if (response.status === 404) throw new Error("Café no encontrado.");
+  if (!response.ok) throw new Error("No se ha podido guardar el café.");
+  return (await response.json()) as Coffee;
 }
 
 export async function deleteCoffee(id: number): Promise<void> {
-  await wait(300);
-  const changes = readChanges().filter((item) => item.id !== id);
-  localStorage.setItem(storageKey, JSON.stringify(changes));
-  localStorage.setItem(deletedKey, JSON.stringify([...readDeleted(), id]));
+  const response = await fetch(`${baseUrl}/${id}`, { method: "DELETE" });
+  if (!response.ok) throw new Error("No se ha podido eliminar el café.");
 }
