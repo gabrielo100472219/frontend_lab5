@@ -1,0 +1,45 @@
+client-cors/src/core/api/request.ts
+  s_27a53dedf9582b::t_26b7de2533b706 28-31
+client-cors/src/pods/hotel/hotel.component.tsx
+  s_27a53dedf9582b::t_fdab385a25db86 36-38
+client-cors/src/pods/hotel/hotel.container.tsx
+  s_27a53dedf9582b::t_7af6bc3b9a43a8 34-35,37-39
+client-cors/src/pods/hotel/hotel.mappers.ts
+  s_27a53dedf9582b::t_1a3b0efccc44be 14-15,27-28
+client-cors/src/pods/hotel/hotel.validations.ts
+  s_27a53dedf9582b::t_106490c391e249 18-19
+client-cors/src/pods/hotel/hotel.vm.ts
+  s_27a53dedf9582b::t_b9cd0b6a6562b2 8-9,19-20
+client/src/hotels.api.ts
+  s_27a53dedf9582b::t_4c922fa7fb3bd1 24-30,33-42,45,49-60,87-93,127-128,131-138
+client/src/hotels.axios.ts
+  s_27a53dedf9582b::t_44471f582267dc 1,17,19-27
+hotels-server/front/assets/index-XZBsHSEM.js
+  s_27a53dedf9582b::t_42498ef360f904 56-63,66-68,71-72,81,85-86
+hotels-server/front/index.html
+  s_27a53dedf9582b::t_78559c9f277130 8
+hotels-server/src/errors.ts
+  s_27a53dedf9582b::t_d1ba5f52c8161a 1-38
+hotels-server/src/index.ts
+  s_27a53dedf9582b::t_6140fe5f3e8d02 8-13,25-26,34-35,43,50-54,60,70,78-80,84,93-95,99,106-108,112,116-120
+hotels-server/src/middleware.ts
+  s_27a53dedf9582b::t_bb56591e55559c 2,12-17
+client/src/main.ts
+  s_27a53dedf9582b::t_618c2d86f84799 15,143-163,175-177
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "05e257f72bd8b3cac86c54a92c0913cac8f474f9",
+  "prompts": {},
+  "sessions": {
+    "s_27a53dedf9582b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c09cec15-3a3f-40d9-bb2d-3a26cce164c3",
+        "model": "unknown"
+      },
+      "human_author": "Gabriel Ortega <gabrielon@ext.inditex.com>"
+    }
+  }
+}
