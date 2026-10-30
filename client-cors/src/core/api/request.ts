@@ -25,7 +25,10 @@ export const request = async <T>(
   });
 
   if (!response.ok) {
-    throw new Error(`${method} ${url} → ${response.status} ${response.statusText}`);
+    // hotels-server's error envelope: { error: { code, message, field } }
+    const body = await response.json().catch(() => undefined);
+    const message = body?.error?.message ?? response.statusText;
+    throw new Error(`${method} ${url} → ${response.status} ${message}`);
   }
 
   if (response.status === 204) {

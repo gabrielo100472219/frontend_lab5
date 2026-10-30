@@ -5,6 +5,8 @@ export interface Hotel {
   rating: number;
   address: string;
   city: string;
+  lowRate: number;
+  highRate: number;
 }
 
 export const createEmptyHotel = (): Hotel => ({
@@ -14,4 +16,6 @@ export const createEmptyHotel = (): Hotel => ({
   rating: 3,
   address: '',
   city: '',
+  lowRate: 0,
+  highRate: 0,
 });

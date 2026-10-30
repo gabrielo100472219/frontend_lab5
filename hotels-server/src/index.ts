@@ -5,6 +5,12 @@ import morgan from "morgan";
 import { config } from "./config.js";
 import { repositories } from "./data-layer/index.js";
 import { checkContentTypeJSON } from './middleware.js';
+import {
+  sendError,
+  sendInternalError,
+  sendNotFound,
+  validateNewHotel,
+} from "./errors.js";
 
 const { useCORS, port } = config;
 
@@ -15,14 +21,17 @@ const app = express();
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
-app.use('/api', checkContentTypeJSON);
 
+// cors() has to run before the Accept check: the browser's preflight (OPTIONS)
+// carries "Accept: */*", and cors() answers it with 204 without calling next().
 if (useCORS) {
   app.use(express.static("public"));
   app.use("/api", cors());
 } else {
   app.use(express.static("front"));
 }
+
+app.use('/api', checkContentTypeJSON);
 
 // Routes
 app.get("/api/hotels", (_: Request, res: Response) => {
@@ -31,29 +40,24 @@ app.get("/api/hotels", (_: Request, res: Response) => {
     res.json({ data });
   } catch (err) {
     // TODO: Handle error type
-    res.status(500).json({
-      error: {
-        code: 500,
-        message: "Internal server error",
-      },
-    });
+    sendInternalError(res);
   }
 });
 
 app.post("/api/hotels", (req: Request, res: Response) => {
   const hotel = req.body;
 
+  const invalid = validateNewHotel(hotel);
+  if (invalid) {
+    return sendError(res, 400, "invalid_parameter", invalid.message, invalid.field);
+  }
+
   try {
     const data = hotelRepo.create(hotel);
     res.status(201).send({ data });
   } catch (err) {
     // TODO: Handle error type
-    res.status(500).json({
-      error: {
-        code: 500,
-        message: "Internal server error",
-      },
-    });
+    sendInternalError(res);
   }
 });
 
@@ -63,12 +67,7 @@ app.get("/api/cities", (_: Request, res: Response) => {
     res.json({ data });
   } catch (err) {
     // TODO: Handle error type
-    res.status(500).json({
-      error: {
-        code: 500,
-        message: "Internal server error",
-      },
-    });
+    sendInternalError(res);
   }
 });
 
@@ -76,15 +75,13 @@ app.get("/api/hotels/:id", (req: Request<{ id: string }>, res: Response) => {
   try {
     const { id } = req.params;
     const data = hotelRepo.findById(id);
+    if (!data) {
+      return sendNotFound(res, id);
+    }
     res.json({ data });
   } catch (error) {
     // TODO: Handle error type
-    res.status(500).json({
-      error: {
-        code: 500,
-        message: "Internal server error",
-      },
-    });
+    sendInternalError(res);
   }
 });
 
@@ -93,32 +90,32 @@ app.put("/api/hotels/:id", (req: Request<{ id: string }>, res: Response) => {
     const { id } = req.params;
     const hotel = req.body;
     const data = hotelRepo.update(id, hotel);
+    if (!data) {
+      return sendNotFound(res, id);
+    }
     res.json({ data });
   } catch (error) {
     // TODO: Handle error type
-    res.status(500).json({
-      error: {
-        code: 500,
-        message: "Internal server error",
-      },
-    });
+    sendInternalError(res);
   }
 });
 
 app.delete("/api/hotels/:id", (req: Request<{ id: string }>, res: Response) => {
   try {
     const { id } = req.params;
-    hotelRepo.delete(id);
+    if (!hotelRepo.delete(id)) {
+      return sendNotFound(res, id);
+    }
     res.status(204).send();
   } catch (error) {
     // TODO: Handle error type
-    res.status(500).json({
-      error: {
-        code: 500,
-        message: "Internal server error",
-      },
-    });
+    sendInternalError(res);
   }
+});
+
+// Unknown /api routes answer JSON too, not Express's HTML page.
+app.use("/api", (req: Request, res: Response) => {
+  sendError(res, 404, "not_found", `Cannot ${req.method} ${req.originalUrl}`);
 });
 
 app.listen(port, () => {

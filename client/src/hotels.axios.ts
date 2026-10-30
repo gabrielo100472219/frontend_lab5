@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import type { Hotel, NewHotel } from "./hotels.api.ts";
 
 // axios sends "Accept: application/json, text/plain, */*" by default, and the
@@ -14,9 +14,17 @@ export const getHotels = async () => {
   return data.data;
 };
 
+// axios rejects on any non-2xx, so the 404 (D1) arrives in the catch.
 export const getHotel = async (id: string): Promise<Hotel | null> => {
-  const { data } = await api.get<{ data?: Hotel }>(`/hotels/${id}`);
-  return data.data ?? null;
+  try {
+    const { data } = await api.get<{ data: Hotel }>(`/hotels/${id}`);
+    return data.data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
 };
 
 export const createHotel = async (hotel: NewHotel) => {

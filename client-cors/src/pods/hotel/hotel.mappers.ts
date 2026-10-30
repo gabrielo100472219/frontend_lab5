@@ -11,6 +11,8 @@ export const mapHotelFromApiToVm = (
   rating: hotel.hotelRating,
   address: hotel.address1,
   city: hotel.city,
+  lowRate: hotel.lowRate,
+  highRate: hotel.highRate,
 });
 
 export const mapHotelFromVmToApi = (hotel: viewModel.Hotel): apiModel.Hotel =>
@@ -22,4 +24,6 @@ export const mapHotelFromVmToApi = (hotel: viewModel.Hotel): apiModel.Hotel =>
     hotelRating: hotel.rating,
     address1: hotel.address,
     city: hotel.city,
+    lowRate: hotel.lowRate,
+    highRate: hotel.highRate,
   } as unknown) as apiModel.Hotel);

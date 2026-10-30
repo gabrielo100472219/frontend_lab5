@@ -33,6 +33,9 @@ export const HotelComponent: React.FunctionComponent<Props> = (props) => {
           <TextFieldComponent name="address" label="Address" />
           <RatingComponent name="rating" max={5} />
           <SelectComponent name="city" label="City" items={cities} />
+          {/* hotels-server (D1) rejects a POST whose prices aren't numbers */}
+          <TextFieldComponent name="lowRate" label="Low rate" type="number" />
+          <TextFieldComponent name="highRate" label="High rate" type="number" />
           <TextFieldComponent
             name="description"
             label="Description"

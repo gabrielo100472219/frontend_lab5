@@ -12,6 +12,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <button id="load-all" type="button">Cargar todo</button>
     <button id="load-failing" type="button">Cargar con fallo</button>
     <button id="reload" type="button">Recargar</button>
+    <button id="invalid" type="button">Crear hotel sin nombre</button>
   </div>
   <pre id="output" aria-live="polite"></pre>
 </main>
@@ -139,6 +140,27 @@ const reload = async () => {
   }
 };
 
+// D1: the server now answers 400 with { error: { code, message, field } }.
+const createInvalidHotel = async () => {
+  output.textContent = "";
+  try {
+    await fetchClient.createHotel({
+      name: "",
+      city: "Seattle",
+      lowRate: 90,
+      highRate: 120,
+    });
+    log("Creado (no debería pasar)");
+  } catch (error) {
+    if (error instanceof fetchClient.HttpError && error.apiError) {
+      const { code, message, field } = error.apiError;
+      log(`El servidor dice: ${message} (code: ${code}, field: ${field})`);
+    } else {
+      logError(error);
+    }
+  }
+};
+
 document
   .querySelector("#crud")!
   .addEventListener("click", () => runCrud(fetchClient));
@@ -150,3 +172,6 @@ document
   .querySelector("#load-failing")!
   .addEventListener("click", loadWithFailure);
 document.querySelector("#reload")!.addEventListener("click", reload);
+document
+  .querySelector("#invalid")!
+  .addEventListener("click", createInvalidHotel);

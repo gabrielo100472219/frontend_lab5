@@ -15,6 +15,8 @@ const validationSchema: ValidationSchema = {
     ],
     address: [Validators.required],
     city: [Validators.required],
+    lowRate: [Validators.required],
+    highRate: [Validators.required],
   },
 };
 

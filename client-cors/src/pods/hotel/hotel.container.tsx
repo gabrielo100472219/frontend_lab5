@@ -31,11 +31,12 @@ export const HotelContainer: React.FunctionComponent = () => {
 
   const handleSave = async (hotel: Hotel) => {
     const apiHotel = mapHotelFromVmToApi(hotel);
-    const success = await api.saveHotel(apiHotel);
-    if (success) {
+    try {
+      await api.saveHotel(apiHotel);
       navigate(-1);
-    } else {
-      alert('Error on save hotel');
+    } catch (error) {
+      // The server explains what was wrong (D1): show its message.
+      alert(error instanceof Error ? error.message : 'Error on save hotel');
     }
   };
 

@@ -21,15 +21,42 @@ export interface City {
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
+// The server's error envelope (concept 02): { error: { code, message, field } }
+interface ApiError {
+  code: string;
+  message: string;
+  field?: string;
+}
+
 export class HttpError extends Error {
   readonly status: number;
+  readonly apiError?: ApiError;
 
-  constructor(method: string, url: string, status: number, statusText: string) {
-    super(`${method} ${url} → ${status} ${statusText}`);
+  constructor(
+    method: string,
+    url: string,
+    status: number,
+    statusText: string,
+    apiError?: ApiError,
+  ) {
+    super(`${method} ${url} → ${status} ${apiError?.message ?? statusText}`);
     this.name = "HttpError";
     this.status = status;
+    this.apiError = apiError;
   }
 }
+
+// Not every error comes with the envelope (a proxy's HTML page, for instance).
+const readApiError = async (
+  response: Response,
+): Promise<ApiError | undefined> => {
+  try {
+    const body = (await response.json()) as { error?: ApiError };
+    return typeof body.error?.message === "string" ? body.error : undefined;
+  } catch {
+    return undefined;
+  }
+};
 
 interface RequestOptions {
   method?: "GET" | "POST" | "PUT" | "DELETE";
@@ -57,7 +84,13 @@ export const request = async <T>(
   });
 
   if (!response.ok) {
-    throw new HttpError(method, url, response.status, response.statusText);
+    throw new HttpError(
+      method,
+      url,
+      response.status,
+      response.statusText,
+      await readApiError(response),
+    );
   }
 
   // 204 No Content: there is no body, so response.json() would throw.
@@ -91,12 +124,18 @@ export const getHotels = async (signal?: AbortSignal) =>
     "/hotels",
   );
 
-// The server answers 200 with {} (no data key) when the id doesn't exist,
-// so a missing data means "not found", not an error.
+// Since D1 the server answers 404 when the id doesn't exist: for this
+// function that's "not found" (null), not an error.
 export const getHotel = async (id: string): Promise<Hotel | null> => {
   const path = `/hotels/${id}`;
-  const hotel = await request<unknown>(path);
-  return hotel === undefined ? null : parseResponse(hotelSchema, hotel, path);
+  try {
+    return parseResponse(hotelSchema, await request<unknown>(path), path);
+  } catch (error) {
+    if (error instanceof HttpError && error.status === 404) {
+      return null;
+    }
+    throw error;
+  }
 };
 
 export const createHotel = (hotel: NewHotel) =>

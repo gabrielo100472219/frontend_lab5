@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
+import { sendError } from "./errors.js";
 
 export const checkContentTypeJSON = (
   req: Request,
@@ -8,7 +9,12 @@ export const checkContentTypeJSON = (
   const accept = req.get("Accept");
 
   if (accept !== "application/json") {
-    return res.status(406).json({ error: "Not Acceptable" });
+    return sendError(
+      res,
+      406,
+      "not_acceptable",
+      "This API only answers to Accept: application/json.",
+    );
   }
 
   next();
